@@ -1,0 +1,49 @@
+<div class="container">
+    <hr>
+    <hr>
+    <hr>
+    <h1>Upload Process and Form Data</h1>
+    <hr>
+    <hr>
+    <hr>
+    <form [formGroup]="form" (submit)="onSubmit()">
+        <div class="form-row"
+             [class.has-error]="form.controls.process_file.touched && form.controls.process_file.invalid || form.controls.process_file.invalid && formIsSubmitted">
+            Process:<input type="file" placeholder="Process File" formControlName="process_file"
+                           (change)="onProcessFileUpload($event)">
+            <p *ngIf="form.controls.process_file.touched && form.controls.process_file.invalid || form.controls.process_file.invalid && formIsSubmitted"
+               class="error-message">
+                Process File is required.</p>
+        </div>
+        <hr>
+        <hr>
+        <div class="form-row"
+             [class.has-error]="form.controls.form_file.touched && form.controls.form_file.invalid || form.controls.form_file.invalid && formIsSubmitted">
+            Form:<input type="file" placeholder="Form File" formControlName="form_file"
+                        (change)="onFormFileUpload($event)"/>
+            <p *ngIf="form.controls.form_file.touched && form.controls.form_file.invalid || form.controls.form_file.invalid && formIsSubmitted"
+               class="error-message">
+                Form File is required.</p>
+        </div>
+        <hr>
+        <hr>
+        <hr>
+        <p *ngIf="form_error">Process Or Form is Invalid!!</p>
+        <button type="button" (click)="onSubmit()" [disabled]="disable_input" class="btn btn-primary">{{disable_input ? "Process..."  : "Start"}}</button>
+        <hr>
+
+
+
+        <hr>
+        <hr>
+        <hr>
+        <p>
+            {{response_data}}
+        </p>
+        <hr>
+        <hr>
+        <hr>
+        <a href="{{response_url}}" *ngIf="response_url" (click)="openUrl(response_url)">Awesome Link</a>
+    </form>
+</div>
+<router-outlet></router-outlet>
